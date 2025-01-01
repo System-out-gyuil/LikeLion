@@ -1,10 +1,10 @@
 package com.ll.chat1231.chat;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.ll.chat1231.chat.dto.MessagesRequest;
 import com.ll.chat1231.chat.dto.MessagesResponse;
 import com.ll.chat1231.chat.dto.WriteMessageRequest;
 import com.ll.chat1231.chat.dto.WriteMessageResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +13,13 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/chat")
 public class ChatController {
 
     private List<ChatMessage> chatMessages = new ArrayList<>();
+    private final SseEmitters sseEmitters;
+
 
     @PostMapping("/writeMessage")
     @ResponseBody
@@ -25,6 +28,8 @@ public class ChatController {
         ChatMessage cm = new ChatMessage(writeMessageRequest.getAuthorName(), writeMessageRequest.getContent());
 
         chatMessages.add(cm);
+
+        sseEmitters.noti("chat__messageAdded");
 
         return new RsData("200", "메세지가 작성되었습니다.", new WriteMessageResponse(cm));
     }
