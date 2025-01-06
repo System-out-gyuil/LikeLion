@@ -144,3 +144,5 @@ replay_pid*
 
 .terraform
 providers
+
+application-secret.yml
