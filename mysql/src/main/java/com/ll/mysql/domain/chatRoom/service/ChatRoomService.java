@@ -1,6 +1,6 @@
 package com.ll.mysql.domain.chatRoom.service;
 
-import com.ll.mysql.domain.chatRoom.entity.ChatRoomEntity;
+import com.ll.mysql.domain.chatRoom.entity.ChatRoom;
 import com.ll.mysql.domain.chatRoom.repository.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,8 +12,8 @@ import java.util.List;
 public class ChatRoomService {
     private final ChatRoomRepository chatRoomRepository;
 
-    public ChatRoomEntity create(String name) {
-        ChatRoomEntity chatRoom = ChatRoomEntity.builder()
+    public ChatRoom create(String name) {
+        ChatRoom chatRoom = ChatRoom.builder()
                 .name(name)
                 .build();
 
@@ -22,7 +22,7 @@ public class ChatRoomService {
         return chatRoom;
     }
 
-    public List<ChatRoomEntity> getAll() {
+    public List<ChatRoom> getAll() {
         return chatRoomRepository.findAll();
     }
 }

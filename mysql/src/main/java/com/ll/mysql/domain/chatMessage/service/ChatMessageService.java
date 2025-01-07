@@ -1,21 +1,31 @@
 package com.ll.mysql.domain.chatMessage.service;
 
-import com.ll.mysql.domain.chatMessage.entity.ChatMessageEntity;
+import com.ll.mysql.domain.chatMessage.entity.ChatMessage;
 import com.ll.mysql.domain.chatMessage.repository.ChatMessageRepository;
-import com.ll.mysql.domain.chatRoom.entity.ChatRoomEntity;
+import com.ll.mysql.domain.chatRoom.entity.ChatRoom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
-public class ChatMessageService {
+public class ChatMessageService{
+
     private final ChatMessageRepository chatMessageRepository;
-    public void create(ChatRoomEntity chatRoomEntity, String writerName, String content) {
-        ChatMessageEntity chatMessageEntity = ChatMessageEntity.builder()
-                .chatName(chatRoomEntity)
+
+    public void create(ChatRoom chatRoom, String writerName, String content) {
+        ChatMessage chatMessage = ChatMessage.builder()
+                .chatName(chatRoom)
                 .writerName(writerName)
                 .message(content)
                 .build();
-        chatMessageRepository.save(chatMessageEntity);
+
+        chatMessageRepository.save(chatMessage);
+    }
+
+    public List<ChatMessage> getAll() {
+        List<ChatMessage> chatMessageEntities = chatMessageRepository.findAll();
+        return chatMessageEntities;
     }
 }

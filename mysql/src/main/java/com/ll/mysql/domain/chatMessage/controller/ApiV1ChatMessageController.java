@@ -1,19 +1,23 @@
 package com.ll.mysql.domain.chatMessage.controller;
 
-import jakarta.websocket.server.PathParam;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ll.mysql.domain.chatMessage.entity.ChatMessage;
+import com.ll.mysql.domain.chatMessage.service.ChatMessageService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/chat/rooms")
+@RequestMapping("/api/v1/chat/messages")
+@RequiredArgsConstructor
 public class ApiV1ChatMessageController {
 
+    private final ChatMessageService chatMessageService;
+
     @GetMapping
-    public String rooms() {
-        return "채팅방 목록 조회 완료";
+    public List<ChatMessage> messages() {
+        List<ChatMessage> chatMessageEntities = chatMessageService.getAll();
+        return chatMessageEntities;
     }
 
     @GetMapping("/{roomId}")

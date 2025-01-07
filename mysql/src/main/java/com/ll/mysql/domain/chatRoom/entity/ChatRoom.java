@@ -1,6 +1,6 @@
 package com.ll.mysql.domain.chatRoom.entity;
 
-import com.ll.mysql.domain.chatMessage.entity.ChatMessageEntity;
+import com.ll.mysql.domain.chatMessage.entity.ChatMessage;
 import com.ll.mysql.global.jpa.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -16,14 +16,14 @@ import java.util.List;
 @Getter
 @SuperBuilder
 @ToString(callSuper = true)
-public class ChatRoomEntity  extends BaseEntity {
+public class ChatRoom extends BaseEntity {
 
-    public ChatRoomEntity() {
+    public ChatRoom() {
     }
 
     private String name;
 
     @OneToMany
-    private List<ChatMessageEntity> chatMessageEntities;
+    private List<ChatMessage> chatMessageEntities;
 
 }

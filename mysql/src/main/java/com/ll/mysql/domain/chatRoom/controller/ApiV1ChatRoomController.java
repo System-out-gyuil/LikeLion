@@ -1,6 +1,6 @@
 package com.ll.mysql.domain.chatRoom.controller;
 
-import com.ll.mysql.domain.chatRoom.entity.ChatRoomEntity;
+import com.ll.mysql.domain.chatRoom.entity.ChatRoom;
 import com.ll.mysql.domain.chatRoom.service.ChatRoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +17,8 @@ public class ApiV1ChatRoomController {
     private final ChatRoomService chatRoomService;
 
     @GetMapping
-    public List<ChatRoomEntity> getChatRooms() {
-        List<ChatRoomEntity> ChatRooms = chatRoomService.getAll();
+    public List<ChatRoom> getChatRooms() {
+        List<ChatRoom> ChatRooms = chatRoomService.getAll();
         return ChatRooms;
     }
 
@@ -28,7 +28,8 @@ public class ApiV1ChatRoomController {
     }
 
     @PostMapping
-    public String createChatRoom() {
+    public String createChatRoom(@RequestBody String name) {
+        chatRoomService.create(name);
         return "채팅방 생성완료";
     }
 
