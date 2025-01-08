@@ -17,11 +17,13 @@ public class ApiV1ChatMessageController {
     @GetMapping
     public List<ChatMessage> messages() {
         List<ChatMessage> chatMessageEntities = chatMessageService.getAll();
+
         return chatMessageEntities;
     }
 
     @GetMapping("/{roomId}")
     public String showRoom(@PathVariable("roomId") Long roomId) {
+
         return roomId + "번 채팅방 조회 완료";
     }
 
