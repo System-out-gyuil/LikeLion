@@ -18,10 +18,10 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increase
     private Integer id;
 
-    @Column(length = 200) // Column 애노테이션은 열의 세부 설정이 가능
+    @Column(length = 200) // Column 에노테이션의 length 속성을 통해 길이 제한
     private String subject;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT") // TEXT 타입으로 지정
     private String content;
 
     private LocalDateTime createDate;
